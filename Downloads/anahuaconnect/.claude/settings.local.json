@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(netstat:*)",
+      "Bash(powershell.exe:*)",
+      "Bash(npm run:*)",
+      "Bash(vercel:*)",
+      "Bash(git *)"
+    ]
+  }
+}
