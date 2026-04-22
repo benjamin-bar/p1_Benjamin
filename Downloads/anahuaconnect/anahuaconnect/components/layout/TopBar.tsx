@@ -81,8 +81,8 @@ export default function TopBar() {
                        flex items-center gap-3 flex-shrink-0 sticky top-0 z-10">
       {showBack && (
         <button onClick={() => router.back()}
-          className="w-8 h-8 rounded-lg flex items-center justify-center
-                     hover:bg-gray-100 transition-colors text-brand md:hidden">
+          className="w-9 h-9 rounded-lg flex items-center justify-center
+                     hover:bg-gray-100 transition-colors text-brand flex-shrink-0">
           <ArrowLeft size={18} />
         </button>
       )}

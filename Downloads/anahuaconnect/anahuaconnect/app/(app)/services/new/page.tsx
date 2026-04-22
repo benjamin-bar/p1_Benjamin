@@ -62,11 +62,11 @@ export default function NewServicePage() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="px-4 py-4 space-y-4 max-w-2xl">
+    <form onSubmit={handleSubmit} className="px-4 py-5 space-y-5 max-w-2xl mx-auto md:mx-0">
       {/* Category selector */}
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-2">Categoría</label>
-        <div className="grid grid-cols-4 gap-2">
+        <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
           {(Object.entries(CATEGORIES) as [ServiceCategory, typeof CATEGORIES[ServiceCategory]][]).map(
             ([key, cat]) => (
               <button

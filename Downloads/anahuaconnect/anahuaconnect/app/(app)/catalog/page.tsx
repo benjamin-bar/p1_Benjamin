@@ -80,7 +80,16 @@ export default async function CatalogPage({
                 <h2 className="text-sm font-semibold text-gray-700 mb-3">
                   {activeCategory ? CATEGORIES[activeCategory].label : '⭐ Destacados'}
                 </h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-2.5">
+                {/* Mobile: horizontal scroll */}
+                <div className="md:hidden flex gap-3 overflow-x-auto no-scrollbar -mx-4 px-4 pb-1">
+                  {featured.map(s => (
+                    <div key={s.id} className="w-[72vw] max-w-[280px] flex-shrink-0">
+                      <ServiceCard service={s as any} />
+                    </div>
+                  ))}
+                </div>
+                {/* Desktop: grid */}
+                <div className="hidden md:grid md:grid-cols-2 xl:grid-cols-3 gap-2.5">
                   {featured.map(s => (
                     <ServiceCard key={s.id} service={s as any} />
                   ))}

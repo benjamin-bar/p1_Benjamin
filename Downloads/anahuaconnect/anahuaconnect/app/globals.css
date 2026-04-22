@@ -11,12 +11,27 @@
 
   * { -webkit-tap-highlight-color: transparent; }
 
-  html { scroll-behavior: smooth; }
+  html {
+    scroll-behavior: smooth;
+    /* Prevent iOS bounce on overscroll */
+    overscroll-behavior: none;
+  }
 
   body {
     @apply bg-gray-50 text-gray-900 antialiased;
-    /* Prevent horizontal scroll on mobile */
     overflow-x: hidden;
+    /* Enable momentum scroll on iOS */
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Prevent iOS auto-zoom on input focus (inputs must be >= 16px) */
+  input, select, textarea {
+    font-size: 16px !important;
+  }
+
+  /* Better tap behavior — no 300ms delay */
+  button, a, [role="button"] {
+    touch-action: manipulation;
   }
 
   /* Mobile viewport fix */
@@ -26,8 +41,8 @@
 }
 
 @layer components {
-  /* Bottom nav safe area */
-  .pb-nav { padding-bottom: calc(4rem + env(safe-area-inset-bottom)); }
+  /* Bottom nav safe area — nav is ~56px + safe area */
+  .pb-nav { padding-bottom: calc(3.75rem + env(safe-area-inset-bottom)); }
 
   /* Card base */
   .card {
@@ -37,8 +52,9 @@
   /* Input base */
   .input {
     @apply w-full px-4 py-3 rounded-xl border border-gray-200 bg-white
-           text-sm focus:outline-none focus:border-brand focus:ring-1 focus:ring-brand
+           focus:outline-none focus:border-brand focus:ring-1 focus:ring-brand
            transition-colors placeholder:text-gray-400;
+    /* 16px prevents iOS auto-zoom; override via base layer rule above */
   }
 
   /* Primary button */
@@ -78,4 +94,8 @@
   /* Hide scrollbar but keep scroll */
   .no-scrollbar::-webkit-scrollbar { display: none; }
   .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+  /* Dynamic viewport height (respects mobile browser chrome) */
+  .min-h-dvh { min-height: 100dvh; }
+  .h-dvh { height: 100dvh; }
 }
