@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { usePathname, useSearchParams } from 'next/navigation'
 import { Home, Search, PlusCircle, LayoutDashboard, User, MessageCircle, Bell } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
@@ -15,6 +15,14 @@ const TABS = [
 
 export default function Sidebar() {
   const pathname = usePathname()
+  const searchParams = useSearchParams()
+  const hasCategory = searchParams.has('category') || searchParams.has('cat')
+
+  function isActive(href: string) {
+    if (href === '/catalog') return pathname === '/catalog' && !hasCategory
+    if (href === '/catalog?cat') return pathname === '/catalog' && hasCategory
+    return pathname === href
+  }
 
   return (
     <aside className="hidden md:flex flex-col fixed left-0 top-0 h-screen w-60 bg-white border-r border-gray-100 z-20">
@@ -31,8 +39,7 @@ export default function Sidebar() {
       {/* Nav links */}
       <nav className="flex-1 px-3 py-4 space-y-0.5">
         {TABS.map(({ href, label, Icon }) => {
-          const base = href.split('?')[0]
-          const active = pathname === base || (base === '/catalog' && pathname === '/catalog')
+          const active = isActive(href)
           return (
             <Link key={href} href={href}
               className={cn(
